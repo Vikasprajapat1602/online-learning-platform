@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 function Courses() {
+    const [searchTerm, setSearchTerm] = useState("");
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
@@ -20,6 +21,12 @@ function Courses() {
         fetchCourses();
     }, []);
 
+    const filteredCourses = courses.filter((course) =>
+        course.title
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase())
+    );
+
 
 
     return (
@@ -34,10 +41,33 @@ function Courses() {
                     Choose a course and start learning today.
                 </p>
             </div>
+            <div className="mb-6">
+
+                <input
+                    type="text"
+                    placeholder="Search courses..."
+                    value={searchTerm}
+                    onChange={(e) =>
+                        setSearchTerm(e.target.value)
+                    }
+                    className="
+        w-full
+        md:w-96
+        px-4
+        py-3
+        border
+        rounded-xl
+        focus:outline-none
+        focus:ring-2
+        focus:ring-blue-500
+        "
+                />
+
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                {courses.map((course) => (
+                {filteredCourses.map((course) => (
 
                     <motion.div
                         key={course.id}
@@ -82,6 +112,11 @@ function Courses() {
                 ))}
 
             </div>
+            {filteredCourses.length === 0 && (
+                <div className="text-gray-500">
+                    No courses found.
+                </div>
+            )}
 
         </div>
     );

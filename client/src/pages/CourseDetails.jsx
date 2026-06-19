@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
     getCourseById,
     enrollCourse,
@@ -8,6 +8,8 @@ import {
 } from "../services/courseService";
 
 function CourseDetails() {
+
+    const navigate = useNavigate();
 
     const { id } = useParams();
 
@@ -57,6 +59,7 @@ function CourseDetails() {
         try {
             const res = await enrollCourse(id);
             alert(res.message);
+            navigate("/my-courses");
             fetchProgress();
         } catch (error) {
             alert(error.response?.data?.message || "Enrollment Failed");
@@ -124,34 +127,34 @@ function CourseDetails() {
 
             {/* PROGRESS SECTION */}
             {course.is_enrolled && (
-            <div className="mt-8 bg-white border rounded-2xl p-6 shadow-sm">
+                <div className="mt-8 bg-white border rounded-2xl p-6 shadow-sm">
 
-                <div className="flex justify-between items-center mb-3">
+                    <div className="flex justify-between items-center mb-3">
 
-                    <h2 className="text-lg font-semibold text-gray-800">
-                        Your Progress
-                    </h2>
+                        <h2 className="text-lg font-semibold text-gray-800">
+                            Your Progress
+                        </h2>
 
-                    <span className="text-blue-600 font-semibold">
-                        {progress}%
-                    </span>
+                        <span className="text-blue-600 font-semibold">
+                            {progress}%
+                        </span>
+
+                    </div>
+
+                    <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+                        <div
+                            className="bg-blue-600 h-3 transition-all duration-500"
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
 
                 </div>
-
-                <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
-                    <div
-                        className="bg-blue-600 h-3 transition-all duration-500"
-                        style={{ width: `${progress}%` }}
-                    />
-                </div>
-
-            </div>
             )}
 
-        
+
 
             {/* LESSONS SECTION */}
-            
+
             <div className="mt-10">
 
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">
@@ -189,19 +192,30 @@ function CourseDetails() {
                                 </div>
 
                                 {/* Right */}
+                                {/* Right */}
                                 <div>
 
-                                    {isDone ? (
+                                    {!course.is_enrolled ? (
+
+                                        <span className="bg-gray-100 text-gray-500 px-4 py-2 rounded-lg text-sm">
+                                            Enroll to Access
+                                        </span>
+
+                                    ) : isDone ? (
+
                                         <span className="bg-green-100 text-green-700 px-4 py-2 rounded-lg text-sm">
                                             Completed
                                         </span>
+
                                     ) : (
+
                                         <button
                                             onClick={() => handleComplete(lesson.id)}
                                             className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
                                         >
                                             Mark Complete
                                         </button>
+
                                     )}
 
                                 </div>
@@ -214,7 +228,7 @@ function CourseDetails() {
                 </div>
 
             </div>
-            
+
 
         </div>
     );

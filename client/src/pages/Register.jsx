@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { registerUser } from "../services/authService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
+
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -21,7 +24,10 @@ function Register() {
 
         try {
             await registerUser(formData);
+
             alert("Registration Successful");
+
+            navigate("/login");
 
         } catch (error) {
             console.log("ERROR OBJECT:", error);
