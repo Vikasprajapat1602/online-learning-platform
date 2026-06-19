@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
-
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
+      
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -11,24 +11,25 @@ function Navbar() {
     };
 
     return (
-        <nav className="bg-white border-b shadow-sm px-6 py-4">
-
-            <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <nav className="bg-white border-b sticky top-0 z-50">
+            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
                 {/* Logo */}
-                <Link to="/" className="text-xl font-bold text-blue-600">
+                <Link
+                    to="/"
+                    className="text-2xl font-bold text-blue-600"
+                >
                     LearnHub
                 </Link>
 
-                {/* Right Side */}
-                <div className="flex items-center gap-4">
+                {/* Navigation */}
+                <div className="flex items-center gap-5">
 
-                    {/* IF NOT LOGGED IN */}
-                    {!token && (
+                    {!token ? (
                         <>
                             <Link
                                 to="/login"
-                                className="text-gray-700 hover:text-blue-600 transition"
+                                className="text-gray-600 hover:text-blue-600 transition"
                             >
                                 Login
                             </Link>
@@ -40,28 +41,25 @@ function Navbar() {
                                 Register
                             </Link>
                         </>
-                    )}
-
-                    {/* IF LOGGED IN */}
-                    {token && (
+                    ) : (
                         <>
                             <Link
                                 to="/dashboard"
-                                className="text-gray-700 hover:text-blue-600"
+                                className="text-gray-600 hover:text-blue-600 transition"
                             >
                                 Dashboard
                             </Link>
 
                             <Link
                                 to="/courses"
-                                className="text-gray-700 hover:text-blue-600"
+                                className="text-gray-600 hover:text-blue-600 transition"
                             >
                                 Courses
                             </Link>
 
                             <Link
                                 to="/my-courses"
-                                className="text-gray-700 hover:text-blue-600"
+                                className="text-gray-600 hover:text-blue-600 transition"
                             >
                                 My Courses
                             </Link>

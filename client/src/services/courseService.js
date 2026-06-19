@@ -10,10 +10,17 @@ export const getCourses = async () => {
 
 export const getCourseById = async (id) => {
 
+  const token = localStorage.getItem("token");
+
   console.log("Fetching URL:", `${API_URL}${id}/`);
 
   const response = await axios.get(
-    `${API_URL}${id}/`
+    `${API_URL}${id}/`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
 
   return response.data;

@@ -21,6 +21,7 @@ function CourseDetails() {
         const fetchCourse = async () => {
             try {
                 const data = await getCourseById(id);
+                console.log("Course Detail:", data);
                 setCourse(data);
             } catch (error) {
                 console.log(error);
@@ -108,18 +109,21 @@ function CourseDetails() {
                         {course.description}
                     </p>
 
-                    <button
-                        onClick={handleEnroll}
-                        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
-                    >
-                        Enroll Now
-                    </button>
+                    {!course.is_enrolled && (
+                        <button
+                            onClick={handleEnroll}
+                            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition "
+                        >
+                            Enroll Now
+                        </button>
+                    )}
 
                 </div>
 
             </div>
 
             {/* PROGRESS SECTION */}
+            {course.is_enrolled && (
             <div className="mt-8 bg-white border rounded-2xl p-6 shadow-sm">
 
                 <div className="flex justify-between items-center mb-3">
@@ -142,8 +146,12 @@ function CourseDetails() {
                 </div>
 
             </div>
+            )}
+
+        
 
             {/* LESSONS SECTION */}
+            
             <div className="mt-10">
 
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">
@@ -206,6 +214,7 @@ function CourseDetails() {
                 </div>
 
             </div>
+            
 
         </div>
     );

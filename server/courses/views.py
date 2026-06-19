@@ -87,8 +87,16 @@ class CourseListView(ListAPIView):
 
 
 class CourseDetailView(RetrieveAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
+    def get_serializer_context(self):
+        return {
+            "request": self.request
+        }
 
 class EnrollCourseView(APIView):
 
