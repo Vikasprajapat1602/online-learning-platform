@@ -17,9 +17,9 @@ function Navbar() {
                 {/* Logo */}
                 <Link
                     to="/"
-                    className="text-2xl font-bold text-blue-600"
+                    className="text-2xl font-bold text-blue-800"
                 >
-                    LearnHub
+                    Learnexa
                 </Link>
 
                 {/* Navigation */}
@@ -78,7 +78,7 @@ function Navbar() {
 
                             <button
                                 onClick={handleLogout}
-                                className="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+                                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
                             >
                                 Logout
                             </button>

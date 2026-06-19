@@ -50,7 +50,9 @@ function CourseDetails() {
     }, [id]);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         fetchProgress();
+
     }, [fetchProgress]);
 
     // ---------------- Enroll ----------------
@@ -60,7 +62,7 @@ function CourseDetails() {
             const res = await enrollCourse(id);
             alert(res.message);
             navigate("/my-courses");
-            fetchProgress();
+            // fetchProgress();
         } catch (error) {
             alert(error.response?.data?.message || "Enrollment Failed");
         }

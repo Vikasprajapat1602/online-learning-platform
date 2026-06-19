@@ -8,6 +8,7 @@ import CourseDetails from "./pages/CourseDetails";
 import MyCourses from "./pages/MyCourses";  
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

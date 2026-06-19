@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { getDashboardStats, getMyCourses } from "../services/courseService";
 import { Link } from "react-router-dom";
+import learningImage from "../assets/undraw_learning-to-sketch_uaxi.svg";
 
 function Dashboard() {
 
     const [stats, setStats] = useState(null);
     const [myCourses, setMyCourses] = useState([]);
     const username =
-    localStorage.getItem("username");
+        localStorage.getItem("username");
 
     useEffect(() => {
 
@@ -42,34 +43,55 @@ function Dashboard() {
         <div className="max-w-7xl mx-auto px-6 py-8">
 
             {/* Header */}
-            <div className="bg-white border rounded-2xl p-8 mb-8 shadow-sm">
+            {/* Header */}
+            <div className="bg-white border rounded-2xl p-8 mb-8 shadow-sm flex flex-col md:flex-row items-center justify-between">
 
-                <h1 className="text-3xl font-bold text-gray-800">
-                    Welcome, {username}
-                </h1>
+                {/* LEFT SIDE */}
+                <div className="max-w-2xl">
 
-                <p className="text-gray-500 mt-2">
-                    Continue your learning journey and build new skills.
-                </p>
+                    <h1 className="text-3xl font-bold text-gray-800">
+                        Welcome {username}
+                    </h1>
 
-                <Link
-                    to="/my-courses"
-                    className="inline-block mt-5 bg-blue-600 text-white px-5 py-3 rounded-lg hover:bg-blue-700 transition"
-                >
-                    Continue Learning
-                </Link>
+                    <p className="text-gray-500 mt-2">
+                        Pick up where you left off and keep building your skills
+                    </p>
+
+                    <p className="text-sm text-gray-500 mt-3">
+                        You are doing great — keep going 🚀
+                    </p>
+
+                    <Link
+                        to="/my-courses"
+                        className="inline-block mt-5 bg-blue-600 text-white px-5 py-3 rounded-lg hover:bg-blue-700 transition"
+                    >
+                        Resume Learning
+                    </Link>
+
+                </div>
+
+                {/* RIGHT SIDE IMAGE */}
+                <div className="mt-6 md:mt-0 hidden md:block">
+
+                    <img
+                        src={learningImage}
+                        alt="Learning"
+                        className="w-105 object-contain"
+                    />
+
+                </div>
 
             </div>
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
 
-                    <div className="bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                        <h3 className="text-black-500 first-letter:uppercase font-bold text-base">Total Courses</h3>
-                        <p className="text-2xl font-bold text-black-600 mt-2">
-                            {stats.total_courses}
-                        </p>
-                    </div>
+                <div className="bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                    <h3 className="text-black-500 first-letter:uppercase font-bold text-base">Total Courses</h3>
+                    <p className="text-2xl font-bold text-black-600 mt-2">
+                        {stats.total_courses}
+                    </p>
+                </div>
 
                 <div className="bg-white border rounded-xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                     <h3 className="text-black-500 first-letter:uppercase font-bold text-base">Enrolled Courses</h3>
@@ -155,15 +177,15 @@ function Dashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
                     <div className="bg-white border rounded-xl p-5 shadow-sm">
-                        🏆 First Course Enrolled
+                        1. First Course Enrolled
                     </div>
 
                     <div className="bg-white border rounded-xl p-5 shadow-sm">
-                        📚 Active Learner
+                        2. Active Learner
                     </div>
 
                     <div className="bg-white border rounded-xl p-5 shadow-sm">
-                        🚀 Keep Learning
+                        3. Keep Learning
                     </div>
 
                 </div>
